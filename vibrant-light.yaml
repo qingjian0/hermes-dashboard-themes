@@ -1,0 +1,37 @@
+name: "vibrant-light"
+label: "Vibrant Light"
+description: "Clean white with bold neon accents — punchy and colorful"
+palette:
+  background: "#f0f4ff"
+  midground: "#0f172a"
+  foreground: "#ffffff"
+  warmGlow: "rgba(236, 72, 153, 0.15)"
+  noiseOpacity: 0
+typography:
+  fontSans: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+  fontMono: "ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace"
+  baseSize: "17px"
+  lineHeight: "1.65"
+  letterSpacing: "0"
+layout:
+  radius: "0.625rem"
+  density: comfortable
+colorOverrides:
+  card: "#ffffff"
+  cardForeground: "#0f172a"
+  popover: "#ffffff"
+  popoverForeground: "#0f172a"
+  muted: "#eef2ff"
+  mutedForeground: "#64748b"
+  accent: "#fdf4ff"
+  accentForeground: "#db2777"
+  border: "#e2e8f0"
+  input: "#cbd5e1"
+  primary: "#ec4899"
+  primaryForeground: "#ffffff"
+  secondary: "#ede9fe"
+  secondaryForeground: "#7c3aed"
+  success: "#22c55e"
+  warning: "#f97316"
+  destructive: "#ef4444"
+  ring: "#f472b6"

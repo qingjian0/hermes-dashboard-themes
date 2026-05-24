@@ -1,0 +1,261 @@
+name: "buc"
+label: "蝶彩"
+description: "Butterfly Color — 全浅色渐变，彩虹蝴蝶效果"
+palette:
+  background: "#f0f4ff"
+  midground: "#1e293b"
+  foreground: "#ffffff"
+  warmGlow: "rgba(196, 181, 253, 0.06)"
+  noiseOpacity: 0
+typography:
+  fontSans: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+  fontMono: "ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace"
+  baseSize: "17px"
+  lineHeight: "1.65"
+  letterSpacing: "0"
+layout:
+  radius: "0.75rem"
+  density: comfortable
+colorOverrides:
+  card: "#ffffff"
+  cardForeground: "#0f172a"
+  popover: "#ffffff"
+  popoverForeground: "#0f172a"
+  muted: "#f1f5f9"
+  mutedForeground: "#475569"
+  accent: "#f0f4ff"
+  accentForeground: "#4338ca"
+  border: "#cbd5e1"
+  input: "#94a3b8"
+  primary: "#6366f1"
+  primaryForeground: "#ffffff"
+  secondary: "#fdf2f8"
+  secondaryForeground: "#be185d"
+  success: "#86efac"
+  successForeground: "#166534"
+  warning: "#fde68a"
+  warningForeground: "#92400e"
+  destructive: "#fecaca"
+  destructiveForeground: "#991b1b"
+  ring: "#818cf8"
+customCSS: |
+  /* ═══════════════════════════════════════
+     ROOT — kill ALL black/dark, make it an animated pastel gradient
+     ═══════════════════════════════════════ */
+  [data-layout-variant] {
+    background: linear-gradient(135deg,
+      #f0f4ff 0%, #f5f3ff 14%,
+      #fdf2f8 28%, #fefce8 42%,
+      #f0fdf4 57%, #ecfeff 71%,
+      #f5f3ff 85%, #f0f4ff 100%
+    ) !important;
+    background-size: 600% 600% !important;
+    animation: rootShimmer 30s ease-in-out infinite !important;
+  }
+
+  @keyframes rootShimmer {
+    0%   { background-position: 0% 0%; }
+    12%  { background-position: 25% 30%; }
+    25%  { background-position: 55% 45%; }
+    37%  { background-position: 85% 25%; }
+    50%  { background-position: 60% 70%; }
+    62%  { background-position: 30% 85%; }
+    75%  { background-position: 10% 60%; }
+    87%  { background-position: 5% 25%; }
+    100% { background-position: 0% 0%; }
+  }
+
+  /* ═══════════════════════════════════════
+     BACKDROP — disable dark/invert effects, make transparent
+     ═══════════════════════════════════════ */
+  /* Layer z-1: was difference blend on bg-base → disable */
+  [data-layout-variant] div.fixed.inset-0.z-\[1\] {
+    display: none !important;
+  }
+
+  /* Layer z-2: filler image with invert → hide */
+  [data-layout-variant] div.fixed.inset-0.z-\[2\] {
+    display: none !important;
+  }
+
+  /* Layer z-99: warm glow vignette → keep very subtle */
+  [data-layout-variant] div.fixed.inset-0.z-\[99\] {
+    opacity: 0.08 !important;
+  }
+
+  /* Layer z-101: noise grain → disable (pure light theme) */
+  [data-layout-variant] div.fixed.inset-0.z-\[101\] {
+    display: none !important;
+  }
+
+  /* ═══════════════════════════════════════
+     MOBILE OVERLAY — light instead of black
+     ═══════════════════════════════════════ */
+  .fixed.inset-0.z-40:not(#app-sidebar) {
+    background: rgba(240, 244, 255, 0.7) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  /* ═══════════════════════════════════════
+     SIDEBAR — animated pastel gradient
+     ═══════════════════════════════════════ */
+  #app-sidebar {
+    background: linear-gradient(135deg,
+      #fef2f2 0%, #fdf2f8 12%,
+      #f5f3ff 25%, #eef2ff 37%,
+      #f0fdf4 50%, #fefce8 62%,
+      #fff7ed 75%, #fdf2f8 87%,
+      #fef2f2 100%
+    ) !important;
+    background-size: 800% 800% !important;
+    animation: sidebarShimmer 30s ease-in-out infinite !important;
+    border-right: 1px solid rgba(0,0,0,0.05) !important;
+  }
+
+  @keyframes sidebarShimmer {
+    0%   { background-position: 0% 0%; }
+    12%  { background-position: 30% 20%; }
+    25%  { background-position: 60% 40%; }
+    37%  { background-position: 100% 30%; }
+    50%  { background-position: 70% 60%; }
+    62%  { background-position: 40% 80%; }
+    75%  { background-position: 20% 50%; }
+    87%  { background-position: 10% 30%; }
+    100% { background-position: 0% 0%; }
+  }
+
+  /* ── Sidebar header — slightly deeper ── */
+  #app-sidebar > div:first-child {
+    background: linear-gradient(135deg, #e8ddf5, #ddecf5) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.12) !important;
+  }
+
+  /* ── "Hermes Agent" — inverted color + art serif font ── */
+  #app-sidebar > div:first-child .font-bold {
+    font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', serif !important;
+    color: #ffffff !important;
+    mix-blend-mode: difference !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.1em !important;
+    text-shadow: 0 0 14px rgba(255,255,255,0.3) !important;
+    font-weight: 700 !important;
+  }
+
+  /* ── Sidebar footer ── */
+  #app-sidebar > div:last-child {
+    border-top: 1px solid rgba(0,0,0,0.05) !important;
+    background: rgba(255,255,255,0.35) !important;
+  }
+
+  /* ═══════════════════════════════════════
+     SIDEBAR NAV BUTTONS — cascade gradient cycling
+     Each button smoothly transitions into the next color over time.
+     ═══════════════════════════════════════ */
+  #app-sidebar nav ul { gap: 2px !important; }
+  #app-sidebar nav ul li a {
+    transition: all 0.2s ease !important;
+    border-radius: 0.625rem !important;
+    margin: 0 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
+    font-weight: 500 !important;
+    animation: btnCycle 40s ease-in-out infinite !important;
+  }
+
+  /* Override animation on hover/active with solid deeper color */
+  #app-sidebar nav ul li a:hover,
+  #app-sidebar nav ul li a[aria-current="page"] {
+    animation: none !important;
+  }
+
+  /* Each button starts at a different color in the cycle.
+     Negative delay = start mid-animation. */
+  #app-sidebar nav ul li:nth-child(1) a { animation-delay: 0s; color: #9b1c1c !important; }
+  #app-sidebar nav ul li:nth-child(2) a { animation-delay: -4s; color: #92400e !important; }
+  #app-sidebar nav ul li:nth-child(3) a { animation-delay: -8s; color: #065f46 !important; }
+  #app-sidebar nav ul li:nth-child(4) a { animation-delay: -12s; color: #1e40af !important; }
+  #app-sidebar nav ul li:nth-child(5) a { animation-delay: -16s; color: #5b21b6 !important; }
+  #app-sidebar nav ul li:nth-child(6) a { animation-delay: -20s; color: #9d174d !important; }
+  #app-sidebar nav ul li:nth-child(7) a { animation-delay: -24s; color: #9a3412 !important; }
+  #app-sidebar nav ul li:nth-child(8) a { animation-delay: -28s; color: #115e59 !important; }
+  #app-sidebar nav ul li:nth-child(9) a { animation-delay: -32s; color: #854d0e !important; }
+  #app-sidebar nav ul li:nth-child(10) a { animation-delay: -36s; color: #86198f !important; }
+
+  /* Hover/active colors stay fixed per button */
+  #app-sidebar nav ul li:nth-child(1) a:hover,
+  #app-sidebar nav ul li:nth-child(1) a[aria-current="page"] { background: #f5bdbd !important; }
+  #app-sidebar nav ul li:nth-child(2) a:hover,
+  #app-sidebar nav ul li:nth-child(2) a[aria-current="page"] { background: #fde68a !important; }
+  #app-sidebar nav ul li:nth-child(3) a:hover,
+  #app-sidebar nav ul li:nth-child(3) a[aria-current="page"] { background: #a7f3d0 !important; }
+  #app-sidebar nav ul li:nth-child(4) a:hover,
+  #app-sidebar nav ul li:nth-child(4) a[aria-current="page"] { background: #bfdbfe !important; }
+  #app-sidebar nav ul li:nth-child(5) a:hover,
+  #app-sidebar nav ul li:nth-child(5) a[aria-current="page"] { background: #ddd6fe !important; }
+  #app-sidebar nav ul li:nth-child(6) a:hover,
+  #app-sidebar nav ul li:nth-child(6) a[aria-current="page"] { background: #fbcfe8 !important; }
+  #app-sidebar nav ul li:nth-child(7) a:hover,
+  #app-sidebar nav ul li:nth-child(7) a[aria-current="page"] { background: #fed7aa !important; }
+  #app-sidebar nav ul li:nth-child(8) a:hover,
+  #app-sidebar nav ul li:nth-child(8) a[aria-current="page"] { background: #a7f3d0 !important; }
+  #app-sidebar nav ul li:nth-child(9) a:hover,
+  #app-sidebar nav ul li:nth-child(9) a[aria-current="page"] { background: #fde68a !important; }
+  #app-sidebar nav ul li:nth-child(10) a:hover,
+  #app-sidebar nav ul li:nth-child(10) a[aria-current="page"] { background: #f5d0fe !important; }
+
+  /* ── Button color cycling keyframes ── */
+  @keyframes btnCycle {
+    0%, 4%   { background: #fde8e8; }
+    10%, 14% { background: #fef3cd; }
+    20%, 24% { background: #d1fae5; }
+    30%, 34% { background: #dbeafe; }
+    40%, 44% { background: #ede9fe; }
+    50%, 54% { background: #fce7f3; }
+    60%, 64% { background: #ffedd5; }
+    70%, 74% { background: #ccfbf1; }
+    80%, 84% { background: #fef9c3; }
+    90%, 94% { background: #fae8ff; }
+    100%     { background: #fde8e8; }
+  }
+
+  /* ═══════════════════════════════════════
+     RIGHT PANEL — page-matched very light colors
+     ═══════════════════════════════════════ */
+  /* Set much lighter version of each button color */
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(1) a[aria-current="page"]) { --page-bg: #fef2f2 !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(2) a[aria-current="page"]) { --page-bg: #fefce8 !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(3) a[aria-current="page"]) { --page-bg: #f0fdf4 !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(4) a[aria-current="page"]) { --page-bg: #eff6ff !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(5) a[aria-current="page"]) { --page-bg: #f5f3ff !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(6) a[aria-current="page"]) { --page-bg: #fdf2f8 !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(7) a[aria-current="page"]) { --page-bg: #fff7ed !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(8) a[aria-current="page"]) { --page-bg: #f0fdfa !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(9) a[aria-current="page"]) { --page-bg: #fefce8 !important; }
+  [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(10) a[aria-current="page"]) { --page-bg: #faf5ff !important; }
+
+  /* Apply page background to right panel only */
+  [data-layout-variant] main,
+  [data-layout-variant] [data-chat-active="true"] {
+    background: var(--page-bg) !important;
+    transition: background 1s ease !important;
+  }
+
+  /* Card styling */
+  [data-layout-variant] .rounded-lg {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02) !important;
+  }
+
+  /* Page headers in art font */
+  [data-layout-variant] h1,
+  [data-layout-variant] h2,
+  [data-layout-variant] h3 {
+    font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', serif !important;
+    letter-spacing: 0.02em !important;
+  }
+
+  /* Top accent bar (SelectionSwitcher) */
+  [class*="selection-switcher"],
+  [class*="SelectionSwitcher"] {
+    background: linear-gradient(90deg, #f0e6ff, #e6f0ff, #e6ffe6, #fffae6) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.08) !important;
+  }
+layoutVariant: standard
