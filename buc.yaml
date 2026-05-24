@@ -40,7 +40,7 @@ colorOverrides:
   ring: "#818cf8"
 customCSS: |
   /* ═══════════════════════════════════════
-     ROOT — kill ALL black/dark, make it an animated pastel gradient
+     ROOT — animated pastel gradient over bg-black
      ═══════════════════════════════════════ */
   [data-layout-variant] {
     background: linear-gradient(135deg,
@@ -50,46 +50,33 @@ customCSS: |
       #f5f3ff 85%, #f0f4ff 100%
     ) !important;
     background-size: 600% 600% !important;
-    animation: rootShimmer 30s ease-in-out infinite !important;
+    animation: rootShimmer 36s ease-in-out infinite !important;
   }
-
   @keyframes rootShimmer {
     0%   { background-position: 0% 0%; }
-    12%  { background-position: 25% 30%; }
-    25%  { background-position: 55% 45%; }
-    37%  { background-position: 85% 25%; }
-    50%  { background-position: 60% 70%; }
-    62%  { background-position: 30% 85%; }
-    75%  { background-position: 10% 60%; }
-    87%  { background-position: 5% 25%; }
+    14%  { background-position: 25% 30%; }
+    28%  { background-position: 55% 45%; }
+    42%  { background-position: 85% 25%; }
+    57%  { background-position: 60% 70%; }
+    71%  { background-position: 30% 85%; }
+    85%  { background-position: 10% 60%; }
     100% { background-position: 0% 0%; }
   }
 
   /* ═══════════════════════════════════════
-     BACKDROP — disable dark/invert effects, make transparent
+     BACKDROP — disable dark/invert layers
      ═══════════════════════════════════════ */
-  /* Layer z-1: was difference blend on bg-base → disable */
-  [data-layout-variant] div.fixed.inset-0.z-\[1\] {
-    display: none !important;
-  }
-
-  /* Layer z-2: filler image with invert → hide */
-  [data-layout-variant] div.fixed.inset-0.z-\[2\] {
-    display: none !important;
-  }
-
-  /* Layer z-99: warm glow vignette → keep very subtle */
-  [data-layout-variant] div.fixed.inset-0.z-\[99\] {
-    opacity: 0.08 !important;
-  }
-
-  /* Layer z-101: noise grain → disable (pure light theme) */
+  [data-layout-variant] div.fixed.inset-0.z-\[1\],
+  [data-layout-variant] div.fixed.inset-0.z-\[2\],
   [data-layout-variant] div.fixed.inset-0.z-\[101\] {
     display: none !important;
   }
+  [data-layout-variant] div.fixed.inset-0.z-\[99\] {
+    opacity: 0.06 !important;
+  }
 
   /* ═══════════════════════════════════════
-     MOBILE OVERLAY — light instead of black
+     MOBILE OVERLAY — light blur
      ═══════════════════════════════════════ */
   .fixed.inset-0.z-40:not(#app-sidebar) {
     background: rgba(240, 244, 255, 0.7) !important;
@@ -108,10 +95,9 @@ customCSS: |
       #fef2f2 100%
     ) !important;
     background-size: 800% 800% !important;
-    animation: sidebarShimmer 30s ease-in-out infinite !important;
+    animation: sidebarShimmer 36s ease-in-out infinite !important;
     border-right: 1px solid rgba(0,0,0,0.05) !important;
   }
-
   @keyframes sidebarShimmer {
     0%   { background-position: 0% 0%; }
     12%  { background-position: 30% 20%; }
@@ -124,13 +110,13 @@ customCSS: |
     100% { background-position: 0% 0%; }
   }
 
-  /* ── Sidebar header — slightly deeper ── */
+  /* ── Sidebar header ── */
   #app-sidebar > div:first-child {
     background: linear-gradient(135deg, #e8ddf5, #ddecf5) !important;
     border-bottom: 1px solid rgba(99, 102, 241, 0.12) !important;
   }
 
-  /* ── "Hermes Agent" — inverted color + art serif font ── */
+  /* ── "Hermes Agent" inverted color + art serif font ── */
   #app-sidebar > div:first-child .font-bold {
     font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', serif !important;
     color: #ffffff !important;
@@ -149,38 +135,34 @@ customCSS: |
 
   /* ═══════════════════════════════════════
      SIDEBAR NAV BUTTONS — cascade gradient cycling
-     Each button smoothly transitions into the next color over time.
      ═══════════════════════════════════════ */
   #app-sidebar nav ul { gap: 2px !important; }
   #app-sidebar nav ul li a {
-    transition: all 0.2s ease !important;
+    transition: background 0.3s ease !important;
     border-radius: 0.625rem !important;
     margin: 0 0.5rem !important;
     padding: 0.5rem 0.75rem !important;
     font-weight: 500 !important;
-    animation: btnCycle 40s ease-in-out infinite !important;
+    animation: btnCycle 50s ease-in-out infinite !important;
   }
-
-  /* Override animation on hover/active with solid deeper color */
   #app-sidebar nav ul li a:hover,
   #app-sidebar nav ul li a[aria-current="page"] {
     animation: none !important;
   }
 
-  /* Each button starts at a different color in the cycle.
-     Negative delay = start mid-animation. */
+  /* Each button starts at a different color; negative delay = start mid-cycle */
   #app-sidebar nav ul li:nth-child(1) a { animation-delay: 0s; color: #9b1c1c !important; }
-  #app-sidebar nav ul li:nth-child(2) a { animation-delay: -4s; color: #92400e !important; }
-  #app-sidebar nav ul li:nth-child(3) a { animation-delay: -8s; color: #065f46 !important; }
-  #app-sidebar nav ul li:nth-child(4) a { animation-delay: -12s; color: #1e40af !important; }
-  #app-sidebar nav ul li:nth-child(5) a { animation-delay: -16s; color: #5b21b6 !important; }
-  #app-sidebar nav ul li:nth-child(6) a { animation-delay: -20s; color: #9d174d !important; }
-  #app-sidebar nav ul li:nth-child(7) a { animation-delay: -24s; color: #9a3412 !important; }
-  #app-sidebar nav ul li:nth-child(8) a { animation-delay: -28s; color: #115e59 !important; }
-  #app-sidebar nav ul li:nth-child(9) a { animation-delay: -32s; color: #854d0e !important; }
-  #app-sidebar nav ul li:nth-child(10) a { animation-delay: -36s; color: #86198f !important; }
+  #app-sidebar nav ul li:nth-child(2) a { animation-delay: -5s; color: #92400e !important; }
+  #app-sidebar nav ul li:nth-child(3) a { animation-delay: -10s; color: #065f46 !important; }
+  #app-sidebar nav ul li:nth-child(4) a { animation-delay: -15s; color: #1e40af !important; }
+  #app-sidebar nav ul li:nth-child(5) a { animation-delay: -20s; color: #5b21b6 !important; }
+  #app-sidebar nav ul li:nth-child(6) a { animation-delay: -25s; color: #9d174d !important; }
+  #app-sidebar nav ul li:nth-child(7) a { animation-delay: -30s; color: #9a3412 !important; }
+  #app-sidebar nav ul li:nth-child(8) a { animation-delay: -35s; color: #115e59 !important; }
+  #app-sidebar nav ul li:nth-child(9) a { animation-delay: -40s; color: #854d0e !important; }
+  #app-sidebar nav ul li:nth-child(10) a { animation-delay: -45s; color: #86198f !important; }
 
-  /* Hover/active colors stay fixed per button */
+  /* Hover/active deeper per button */
   #app-sidebar nav ul li:nth-child(1) a:hover,
   #app-sidebar nav ul li:nth-child(1) a[aria-current="page"] { background: #f5bdbd !important; }
   #app-sidebar nav ul li:nth-child(2) a:hover,
@@ -202,7 +184,7 @@ customCSS: |
   #app-sidebar nav ul li:nth-child(10) a:hover,
   #app-sidebar nav ul li:nth-child(10) a[aria-current="page"] { background: #f5d0fe !important; }
 
-  /* ── Button color cycling keyframes ── */
+  /* ── Button color cycling keyframes (50s full cycle, 5s per color) ── */
   @keyframes btnCycle {
     0%, 4%   { background: #fde8e8; }
     10%, 14% { background: #fef3cd; }
@@ -220,7 +202,6 @@ customCSS: |
   /* ═══════════════════════════════════════
      RIGHT PANEL — page-matched very light colors
      ═══════════════════════════════════════ */
-  /* Set much lighter version of each button color */
   [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(1) a[aria-current="page"]) { --page-bg: #fef2f2 !important; }
   [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(2) a[aria-current="page"]) { --page-bg: #fefce8 !important; }
   [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(3) a[aria-current="page"]) { --page-bg: #f0fdf4 !important; }
@@ -232,27 +213,25 @@ customCSS: |
   [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(9) a[aria-current="page"]) { --page-bg: #fefce8 !important; }
   [data-layout-variant]:has(#app-sidebar nav ul li:nth-child(10) a[aria-current="page"]) { --page-bg: #faf5ff !important; }
 
-  /* Apply page background to right panel only */
+  /* Apply page background */
   [data-layout-variant] main,
   [data-layout-variant] [data-chat-active="true"] {
     background: var(--page-bg) !important;
-    transition: background 1s ease !important;
+    transition: background 0.8s ease !important;
   }
 
-  /* Card styling */
+  /* ═══════════════════════════════════════
+     CARDS & TEXT
+     ═══════════════════════════════════════ */
   [data-layout-variant] .rounded-lg {
     box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02) !important;
   }
-
-  /* Page headers in art font */
   [data-layout-variant] h1,
   [data-layout-variant] h2,
   [data-layout-variant] h3 {
     font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', serif !important;
     letter-spacing: 0.02em !important;
   }
-
-  /* Top accent bar (SelectionSwitcher) */
   [class*="selection-switcher"],
   [class*="SelectionSwitcher"] {
     background: linear-gradient(90deg, #f0e6ff, #e6f0ff, #e6ffe6, #fffae6) !important;

@@ -5,7 +5,7 @@ palette:
   background: "#ffffff"
   midground: "#334155"
   foreground: "#ffffff"
-  warmGlow: "rgba(196, 181, 253, 0.1)"
+  warmGlow: "rgba(196, 181, 253, 0.08)"
   noiseOpacity: 0
 typography:
   fontSans: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
@@ -22,7 +22,7 @@ colorOverrides:
   popover: "#ffffff"
   popoverForeground: "#334155"
   muted: "#f8fafc"
-  mutedForeground: "#94a3b8"
+  mutedForeground: "#475569"
   accent: "#f0f9ff"
   accentForeground: "#0284c7"
   border: "#e2e8f0"
@@ -31,20 +31,39 @@ colorOverrides:
   primaryForeground: "#ffffff"
   secondary: "#fef3c7"
   secondaryForeground: "#b45309"
-  success: "#a7f3d0"
-  successForeground: "#065f46"
+  success: "#86efac"
+  successForeground: "#166534"
   warning: "#fde68a"
   warningForeground: "#92400e"
   destructive: "#fecaca"
   destructiveForeground: "#991b1b"
   ring: "#a5b4fc"
 customCSS: |
-  /* ── Sidebar: animated gradient background ── */
+  /* Fix root bg-black → white */
+  [data-layout-variant] {
+    background: #ffffff !important;
+  }
+  /* Disable dark Backdrop */
+  [data-layout-variant] div.fixed.inset-0.z-\[1\],
+  [data-layout-variant] div.fixed.inset-0.z-\[2\],
+  [data-layout-variant] div.fixed.inset-0.z-\[101\] {
+    display: none !important;
+  }
+  [data-layout-variant] div.fixed.inset-0.z-\[99\] {
+    opacity: 0.06 !important;
+  }
+  /* Light mobile overlay */
+  .fixed.inset-0.z-40:not(#app-sidebar) {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+
+  /* ═══ SIDEBAR — animated gradient ═══ */
   #app-sidebar {
     background: linear-gradient(135deg, #fff5f5 0%, #f5f3ff 15%, #f0fdf4 30%, #fefce8 45%, #fff7ed 60%, #fdf2f8 75%, #f0f9ff 90%, #fff5f5 100%) !important;
     background-size: 400% 400% !important;
     animation: sidebarShift 18s ease-in-out infinite !important;
-    border-right: none !important;
+    border-right: 1px solid rgba(0,0,0,0.05) !important;
   }
   @keyframes sidebarShift {
     0%   { background-position: 0% 50%; }
@@ -54,111 +73,10 @@ customCSS: |
     100% { background-position: 0% 50%; }
   }
 
-  /* ── Each nav button a different color ── */
-  #app-sidebar nav ul li:nth-child(1) a {
-    background: #fef2f2 !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(1) a:hover,
-  #app-sidebar nav ul li:nth-child(1) a[aria-current="page"] {
-    background: #fecaca !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(2) a {
-    background: #fefce8 !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(2) a:hover,
-  #app-sidebar nav ul li:nth-child(2) a[aria-current="page"] {
-    background: #fde68a !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(3) a {
-    background: #f0fdf4 !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(3) a:hover,
-  #app-sidebar nav ul li:nth-child(3) a[aria-current="page"] {
-    background: #bbf7d0 !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(4) a {
-    background: #eff6ff !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(4) a:hover,
-  #app-sidebar nav ul li:nth-child(4) a[aria-current="page"] {
-    background: #bfdbfe !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(5) a {
-    background: #f5f3ff !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(5) a:hover,
-  #app-sidebar nav ul li:nth-child(5) a[aria-current="page"] {
-    background: #ddd6fe !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(6) a {
-    background: #fdf2f8 !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(6) a:hover,
-  #app-sidebar nav ul li:nth-child(6) a[aria-current="page"] {
-    background: #fbcfe8 !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(7) a {
-    background: #fff7ed !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(7) a:hover,
-  #app-sidebar nav ul li:nth-child(7) a[aria-current="page"] {
-    background: #fed7aa !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(8) a {
-    background: #f0fdfa !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(8) a:hover,
-  #app-sidebar nav ul li:nth-child(8) a[aria-current="page"] {
-    background: #a7f3d0 !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(9) a {
-    background: #fefce8 !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(9) a:hover,
-  #app-sidebar nav ul li:nth-child(9) a[aria-current="page"] {
-    background: #fde68a !important;
-  }
-
-  #app-sidebar nav ul li:nth-child(10) a {
-    background: #fce7f3 !important;
-    border-radius: 0.5rem;
-    margin: 0 0.5rem;
-  }
-  #app-sidebar nav ul li:nth-child(10) a:hover,
-  #app-sidebar nav ul li:nth-child(10) a[aria-current="page"] {
-    background: #f5b8d0 !important;
-  }
-
-  /* ── Sidebar header logo area ── */
+  /* ── Sidebar header ── */
   #app-sidebar > div:first-child {
-    background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
-    border-bottom: 1px solid #6366f1 !important;
+    background: linear-gradient(135deg, #e8ddf5, #ddecf5) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.12) !important;
   }
 
   /* ── "Hermes Agent" inverted color + art font ── */
@@ -166,13 +84,60 @@ customCSS: |
     font-family: 'Georgia', 'Palatino Linotype', 'Book Antiqua', serif !important;
     color: #ffffff !important;
     mix-blend-mode: difference !important;
-    font-size: 1.05rem !important;
-    letter-spacing: 0.08em !important;
-    text-shadow: 0 0 8px rgba(255,255,255,0.3) !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.1em !important;
+    text-shadow: 0 0 12px rgba(255,255,255,0.25) !important;
+    font-weight: 700 !important;
   }
 
   /* ── Sidebar footer ── */
   #app-sidebar > div:last-child {
-    border-top: 1px solid #e2e8f0 !important;
+    border-top: 1px solid rgba(0,0,0,0.05) !important;
+    background: rgba(255,255,255,0.3) !important;
+  }
+
+  /* ═══ SIDEBAR NAV BUTTONS — each a different fixed pastel ═══ */
+  #app-sidebar nav ul { gap: 2px !important; }
+  #app-sidebar nav ul li a {
+    transition: all 0.2s ease !important;
+    border-radius: 0.625rem !important;
+    margin: 0 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
+    font-weight: 500 !important;
+  }
+  #app-sidebar nav ul li:nth-child(1) a { background: #fde8e8 !important; color: #9b1c1c !important; }
+  #app-sidebar nav ul li:nth-child(1) a:hover,
+  #app-sidebar nav ul li:nth-child(1) a[aria-current="page"] { background: #f5bdbd !important; }
+  #app-sidebar nav ul li:nth-child(2) a { background: #fef3cd !important; color: #92400e !important; }
+  #app-sidebar nav ul li:nth-child(2) a:hover,
+  #app-sidebar nav ul li:nth-child(2) a[aria-current="page"] { background: #fde68a !important; }
+  #app-sidebar nav ul li:nth-child(3) a { background: #d1fae5 !important; color: #065f46 !important; }
+  #app-sidebar nav ul li:nth-child(3) a:hover,
+  #app-sidebar nav ul li:nth-child(3) a[aria-current="page"] { background: #a7f3d0 !important; }
+  #app-sidebar nav ul li:nth-child(4) a { background: #dbeafe !important; color: #1e40af !important; }
+  #app-sidebar nav ul li:nth-child(4) a:hover,
+  #app-sidebar nav ul li:nth-child(4) a[aria-current="page"] { background: #bfdbfe !important; }
+  #app-sidebar nav ul li:nth-child(5) a { background: #ede9fe !important; color: #5b21b6 !important; }
+  #app-sidebar nav ul li:nth-child(5) a:hover,
+  #app-sidebar nav ul li:nth-child(5) a[aria-current="page"] { background: #ddd6fe !important; }
+  #app-sidebar nav ul li:nth-child(6) a { background: #fce7f3 !important; color: #9d174d !important; }
+  #app-sidebar nav ul li:nth-child(6) a:hover,
+  #app-sidebar nav ul li:nth-child(6) a[aria-current="page"] { background: #fbcfe8 !important; }
+  #app-sidebar nav ul li:nth-child(7) a { background: #ffedd5 !important; color: #9a3412 !important; }
+  #app-sidebar nav ul li:nth-child(7) a:hover,
+  #app-sidebar nav ul li:nth-child(7) a[aria-current="page"] { background: #fed7aa !important; }
+  #app-sidebar nav ul li:nth-child(8) a { background: #ccfbf1 !important; color: #115e59 !important; }
+  #app-sidebar nav ul li:nth-child(8) a:hover,
+  #app-sidebar nav ul li:nth-child(8) a[aria-current="page"] { background: #a7f3d0 !important; }
+  #app-sidebar nav ul li:nth-child(9) a { background: #fef9c3 !important; color: #854d0e !important; }
+  #app-sidebar nav ul li:nth-child(9) a:hover,
+  #app-sidebar nav ul li:nth-child(9) a[aria-current="page"] { background: #fde68a !important; }
+  #app-sidebar nav ul li:nth-child(10) a { background: #fae8ff !important; color: #86198f !important; }
+  #app-sidebar nav ul li:nth-child(10) a:hover,
+  #app-sidebar nav ul li:nth-child(10) a[aria-current="page"] { background: #f5d0fe !important; }
+
+  /* Card shadow */
+  [data-layout-variant] .rounded-lg {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
   }
 layoutVariant: standard

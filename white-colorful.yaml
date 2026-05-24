@@ -3,28 +3,28 @@ label: "White Colorful"
 description: "Clean white base with vibrant gradient accents — modern and playful"
 palette:
   background: "#f5f7fa"
-  midground: "#1a1a2e"
+  midground: "#1e293b"
   foreground: "#ffffff"
-  warmGlow: "rgba(139, 92, 246, 0.12)"
-  noiseOpacity: 0.08
+  warmGlow: "rgba(139, 92, 246, 0.1)"
+  noiseOpacity: 0
 typography:
   fontSans: "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif"
   fontMono: "'JetBrains Mono', ui-monospace, 'SF Mono', Consolas, monospace"
-  fontDisplay: "'Clash Display', 'Inter', system-ui, sans-serif"
+  fontDisplay: "'Inter', system-ui, sans-serif"
   fontUrl: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
-  baseSize: "15px"
+  baseSize: "16px"
   lineHeight: "1.6"
-  letterSpacing: "-0.01em"
+  letterSpacing: "-0.006em"
 layout:
   radius: "0.75rem"
   density: comfortable
 colorOverrides:
   card: "#ffffff"
-  cardForeground: "#1a1a2e"
+  cardForeground: "#1e293b"
   popover: "#ffffff"
-  popoverForeground: "#1a1a2e"
+  popoverForeground: "#1e293b"
   muted: "#f0f2f5"
-  mutedForeground: "#6b7280"
+  mutedForeground: "#475569"
   accent: "#ede9fe"
   accentForeground: "#5b21b6"
   border: "#e5e7eb"
@@ -37,3 +37,27 @@ colorOverrides:
   warning: "#f59e0b"
   destructive: "#ef4444"
   ring: "#a78bfa"
+customCSS: |
+  /* Fix root bg-black */
+  [data-layout-variant] {
+    background: linear-gradient(170deg, #f5f7fa 0%, #f0f4ff 50%, #faf5ff 100%) !important;
+    background-attachment: fixed !important;
+  }
+  /* Disable dark Backdrop */
+  [data-layout-variant] div.fixed.inset-0.z-\[1\],
+  [data-layout-variant] div.fixed.inset-0.z-\[2\],
+  [data-layout-variant] div.fixed.inset-0.z-\[101\] {
+    display: none !important;
+  }
+  [data-layout-variant] div.fixed.inset-0.z-\[99\] {
+    opacity: 0.06 !important;
+  }
+  /* Light mobile overlay */
+  .fixed.inset-0.z-40:not(#app-sidebar) {
+    background: rgba(245, 247, 250, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+  /* Card subtle shadow */
+  [data-layout-variant] .rounded-lg {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+  }

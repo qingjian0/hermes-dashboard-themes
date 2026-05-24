@@ -5,7 +5,7 @@ palette:
   background: "#ffffff"
   midground: "#334155"
   foreground: "#ffffff"
-  warmGlow: "rgba(196, 181, 253, 0.1)"
+  warmGlow: "rgba(196, 181, 253, 0.08)"
   noiseOpacity: 0
 typography:
   fontSans: "system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
@@ -22,7 +22,7 @@ colorOverrides:
   popover: "#fff7ed"
   popoverForeground: "#334155"
   muted: "#f0fdf4"
-  mutedForeground: "#6b7280"
+  mutedForeground: "#475569"
   accent: "#f5f3ff"
   accentForeground: "#7c3aed"
   border: "#e4e4e7"
@@ -38,3 +38,27 @@ colorOverrides:
   destructive: "#fca5a5"
   destructiveForeground: "#991b1b"
   ring: "#c4b5fd"
+customCSS: |
+  /* Fix root bg-black → white */
+  [data-layout-variant] {
+    background: linear-gradient(170deg, #ffffff 0%, #fafaff 50%, #fffafe 100%) !important;
+    background-attachment: fixed !important;
+  }
+  /* Disable dark Backdrop */
+  [data-layout-variant] div.fixed.inset-0.z-\[1\],
+  [data-layout-variant] div.fixed.inset-0.z-\[2\],
+  [data-layout-variant] div.fixed.inset-0.z-\[101\] {
+    display: none !important;
+  }
+  [data-layout-variant] div.fixed.inset-0.z-\[99\] {
+    opacity: 0.06 !important;
+  }
+  /* Light mobile overlay */
+  .fixed.inset-0.z-40:not(#app-sidebar) {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(8px) !important;
+  }
+  /* Card shadow */
+  [data-layout-variant] .rounded-lg {
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04) !important;
+  }
