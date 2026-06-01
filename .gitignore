@@ -1,0 +1,23 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Archives
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Node
+node_modules/
